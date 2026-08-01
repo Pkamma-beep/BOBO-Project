@@ -26,18 +26,67 @@ export default function BookingFlow() {
   const stepRefs = useRef<Partial<Record<1 | 2 | 3 | 4, HTMLElement | null>>>(
     {}
   );
+  const headingRefs = useRef<Partial<Record<1 | 2 | 3 | 4, HTMLElement | null>>>(
+    {}
+  );
   const isFirstRender = useRef(true);
+  const suppressAutoScroll = useRef(false);
+  const ignoreScrollDetection = useRef(false);
 
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;
     }
+    if (suppressAutoScroll.current) {
+      suppressAutoScroll.current = false;
+      return;
+    }
+    // A forward click is driving this scroll, not the user -- ignore the
+    // scroll-detection observer below until the animation has settled, so
+    // the section we're leaving doesn't get misread as "scrolled back to".
+    ignoreScrollDetection.current = true;
     stepRefs.current[step]?.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
+    const timeout = window.setTimeout(() => {
+      ignoreScrollDetection.current = false;
+    }, 900);
+    return () => window.clearTimeout(timeout);
   }, [step]);
+
+  // Scrolling back up to an already-answered step fades its selection back
+  // out, so the user has to re-select rather than carrying a stale choice.
+  useEffect(() => {
+    const entries = ([1, 2, 3, 4] as const)
+      .map((n) => ({ n, el: headingRefs.current[n] }))
+      .filter(
+        (x): x is { n: 1 | 2 | 3 | 4; el: HTMLElement } => x.el !== undefined && x.el !== null
+      );
+    if (entries.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (observerEntries) => {
+        if (ignoreScrollDetection.current) return;
+        observerEntries.forEach((observerEntry) => {
+          if (!observerEntry.isIntersecting) return;
+          const match = entries.find((x) => x.el === observerEntry.target);
+          if (!match || match.n >= step) return;
+
+          suppressAutoScroll.current = true;
+          if (match.n <= 1 && categorySlug !== null) setCategorySlug(null);
+          if (match.n <= 2 && doctorSlug !== null) setDoctorSlug(null);
+          if (match.n <= 3 && time !== null) setTime(null);
+          setStep(match.n);
+        });
+      },
+      { rootMargin: "-96px 0px -70% 0px", threshold: 0 }
+    );
+
+    entries.forEach(({ el }) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [step, categorySlug, doctorSlug, time]);
 
   const { leadingDays, currentDays, trailingDays } = getCalendarGrid(
     viewMonth.getFullYear(),
@@ -85,7 +134,12 @@ export default function BookingFlow() {
             step === 1 ? "opacity-100" : "opacity-40"
           }`}
         >
-          <div className="flex items-baseline gap-6 mb-10 md:mb-12">
+          <div
+            ref={(el) => {
+              headingRefs.current[1] = el;
+            }}
+            className="flex items-baseline gap-6 mb-10 md:mb-12"
+          >
             <span
               className={`font-mono text-2xl ${
                 step === 1 ? "text-[#3d7068]" : ""
@@ -138,7 +192,12 @@ export default function BookingFlow() {
             step === 2 ? "opacity-100" : "opacity-40"
           }`}
         >
-          <div className="flex items-baseline gap-6 mb-10 md:mb-12">
+          <div
+            ref={(el) => {
+              headingRefs.current[2] = el;
+            }}
+            className="flex items-baseline gap-6 mb-10 md:mb-12"
+          >
             <span
               className={`font-mono text-2xl ${
                 step === 2 ? "text-[#3d7068]" : ""
@@ -198,7 +257,12 @@ export default function BookingFlow() {
             step === 3 ? "opacity-100" : "opacity-40"
           }`}
         >
-          <div className="flex items-baseline gap-6 mb-10 md:mb-12">
+          <div
+            ref={(el) => {
+              headingRefs.current[3] = el;
+            }}
+            className="flex items-baseline gap-6 mb-10 md:mb-12"
+          >
             <span
               className={`font-mono text-2xl ${
                 step === 3 ? "text-[#3d7068]" : ""
@@ -327,7 +391,12 @@ export default function BookingFlow() {
             step === 4 ? "opacity-100" : "opacity-40"
           }`}
         >
-          <div className="flex items-baseline gap-6 mb-10 md:mb-12">
+          <div
+            ref={(el) => {
+              headingRefs.current[4] = el;
+            }}
+            className="flex items-baseline gap-6 mb-10 md:mb-12"
+          >
             <span
               className={`font-mono text-2xl ${
                 step === 4 ? "text-[#3d7068]" : ""
