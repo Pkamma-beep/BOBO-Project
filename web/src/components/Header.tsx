@@ -75,26 +75,26 @@ export default function Header() {
         >
           {menuOpen ? <X size={18} /> : <Menu size={18} />}
         </button>
-      </div>
 
-      {menuOpen && (
-        <div className="md:hidden mt-6 pb-2 flex flex-col gap-6 px-2">
-          {NAV_LINKS.map((link) => {
-            const active = pathname === link.href;
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`font-mono text-[11px] uppercase tracking-[0.3em] ${
-                  active ? "text-[#3d7068]" : ""
-                }`}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
-        </div>
-      )}
+        {menuOpen && (
+          <div className="md:hidden absolute right-0 top-full mt-3 w-48 bg-[#f7f6f2] border border-[#e5e4de] shadow-md flex flex-col">
+            {NAV_LINKS.map((link) => {
+              const active = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`font-mono text-[11px] uppercase tracking-[0.3em] px-6 py-4 border-b border-[#e5e4de] last:border-b-0 transition-colors ${
+                    active ? "text-[#3d7068] bg-white" : "hover:bg-white"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+          </div>
+        )}
+      </div>
     </nav>
   );
 }
