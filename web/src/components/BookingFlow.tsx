@@ -35,7 +35,7 @@ export default function BookingFlow() {
     }
     stepRefs.current[step]?.scrollIntoView({
       behavior: "smooth",
-      block: "center",
+      block: "start",
     });
   }, [step]);
 
@@ -81,7 +81,7 @@ export default function BookingFlow() {
           ref={(el) => {
             stepRefs.current[1] = el;
           }}
-          className={`transition-opacity duration-700 ${
+          className={`scroll-mt-28 transition-opacity duration-700 ${
             step === 1 ? "opacity-100" : "opacity-40"
           }`}
         >
@@ -130,7 +130,7 @@ export default function BookingFlow() {
           ref={(el) => {
             stepRefs.current[2] = el;
           }}
-          className={`transition-opacity duration-700 ${
+          className={`scroll-mt-28 transition-opacity duration-700 ${
             step === 2 ? "opacity-100" : "opacity-40"
           }`}
         >
@@ -187,7 +187,7 @@ export default function BookingFlow() {
           ref={(el) => {
             stepRefs.current[3] = el;
           }}
-          className={`transition-opacity duration-700 ${
+          className={`scroll-mt-28 transition-opacity duration-700 ${
             step === 3 ? "opacity-100" : "opacity-40"
           }`}
         >
@@ -316,7 +316,7 @@ export default function BookingFlow() {
           ref={(el) => {
             stepRefs.current[4] = el;
           }}
-          className={`transition-opacity duration-700 ${
+          className={`scroll-mt-28 transition-opacity duration-700 ${
             step === 4 ? "opacity-100" : "opacity-40"
           }`}
         >
