@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking — BOBO Dental</title>
+  <meta name="view-transition" content="same-origin">
+  <link rel="prefetch" href="https://p.superdesign.dev/draft/ae90abe9-fd92-4f89-87c6-9ed1be314d8c" as="document">
+  <link rel="prefetch" href="https://p.superdesign.dev/draft/f30ff9ed-4faf-46aa-b877-c088d19fa29e" as="document">
+  <link rel="prefetch" href="https://p.superdesign.dev/draft/910d3da6-ee56-4526-91db-3d9f8166d606" as="document">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&amp;family=Space+Grotesk:wght@400;500&amp;family=Space+Mono:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper-bg: #f7f6f2;
+      --ink-fg: #1c1c1c;
+      --forest-green: #3d7068;
+      --muted-text: #B4B4B4;
+      --hairline: #e5e4de;
+      --scanline-blue: #3b82f6;
+      --editorial-easing: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .font-serif { font-family: 'Playfair Display', serif; }
+    .font-sans { font-family: 'Space Grotesk', sans-serif; }
+    .font-mono { font-family: 'Space Mono', monospace; }
+
+    .grid-bg {
+      background-image: linear-gradient(var(--hairline) 1px, transparent 1px), linear-gradient(90deg, var(--hairline) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(circle at center, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 80%);
+    }
+
+    .hairline-b { border-bottom: 1px solid var(--hairline); }
+    .hairline-r { border-right: 1px solid var(--hairline); }
+    .hairline-l { border-left: 1px solid var(--hairline); }
+    .hairline-a { border: 1px solid var(--hairline); }
+
+    .nav-scrolled {
+      background-color: rgba(247, 246, 242, 0.8);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .scanline-progress {
+      height: 2px;
+      background: var(--scanline-blue);
+      transition: width 0.7s var(--editorial-easing);
+      position: relative;
+    }
+
+    .scanline-progress::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; height: 100%; width: 30%;
+      background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
+      animation: scan 2s var(--editorial-easing) infinite;
+    }
+
+    @keyframes scan {
+      0% { left: -30%; }
+      100% { left: 100%; }
+    }
+
+    .step-active { opacity: 1 !important; }
+    .step-inactive { opacity: 0.4; }
+
+    .cta-btn {
+      transition: all 0.7s var(--editorial-easing);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-btn::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(255,255,255,0.2);
+      transform: translateY(100%);
+      transition: transform 0.7s var(--editorial-easing);
+    }
+
+    .cta-btn:hover::after { transform: translateY(0); }
+    .cta-btn:hover { letter-spacing: 0.4em; }
+
+    .vertical-guide {
+      position: fixed;
+      top: 0; bottom: 0; width: 1px; background: var(--hairline); z-index: 1;
+      pointer-events: none;
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--paper-bg); }
+    ::-webkit-scrollbar-thumb { background: var(--muted-text); }
+
+    @view-transition { navigation: auto; }
+    html { background-color: #f7f6f2; }
+    ::view-transition { background-color: #f7f6f2; }
+
+    nav { view-transition-name: main-nav; }
+    #nav-brand-link { view-transition-name: brand; }
+    main { view-transition-name: main-content; }
+
+    ::view-transition-old(main-nav),
+    ::view-transition-new(main-nav),
+    ::view-transition-old(brand),
+    ::view-transition-new(brand) {
+      animation: none;
+      mix-blend-mode: normal;
+    }
+
+    ::view-transition-old(main-content) {
+      animation: 0.25s ease-out both fade-out;
+    }
+    ::view-transition-new(main-content) {
+      animation: 0.25s ease-in 0.1s both fade-in;
+    }
+
+    @keyframes fade-out { from { opacity: 1; } to { opacity: 0; } }
+    @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+  </style>
+</head>
+<body>
+  <div class="min-h-screen bg-[#f7f6f2] text-[#1c1c1c] font-sans selection:bg-[#3d7068] selection:text-white">
+    
+    <!-- Fixed Guides -->
+    <div class="vertical-guide left-1/4"></div>
+    <div class="vertical-guide left-2/4"></div>
+    <div class="vertical-guide left-3/4"></div>
+
+    <!-- Background Texture -->
+    <div class="fixed inset-0 grid-bg pointer-events-none z-0"></div>
+
+    <!-- Navigation -->
+    <nav id="main-nav" class="fixed top-0 left-0 w-full z-50 transition-all duration-700 ease-[var(--editorial-easing)] pt-8 pb-4 px-12">
+      <div class="max-w-7xl mx-auto flex items-center justify-between relative">
+        <div class="flex items-center gap-4">
+          <div class="h-[1px] bg-[#1c1c1c] w-6"></div>
+          <a href="https://p.superdesign.dev/draft/ae90abe9-fd92-4f89-87c6-9ed1be314d8c" id="nav-brand-link" class="font-serif text-[20px] leading-none tracking-tight">BOBO Dental</a>
+          <div class="h-[1px] bg-[#1c1c1c] w-8"></div>
+        </div>
+
+        <div class="flex items-center gap-12">
+          <a href="https://p.superdesign.dev/draft/ae90abe9-fd92-4f89-87c6-9ed1be314d8c" id="nav-home" class="font-mono text-[10px] uppercase tracking-[0.3em] hover:text-[#3d7068] transition-colors">Home</a>
+          <a href="https://p.superdesign.dev/draft/662b536d-9029-4e4f-98aa-891c29a696a2" id="nav-services" class="font-mono text-[10px] uppercase tracking-[0.3em] hover:text-[#3d7068] transition-colors">Services</a>
+          <a href="https://p.superdesign.dev/draft/f30ff9ed-4faf-46aa-b877-c088d19fa29e" id="nav-booking" class="font-mono text-[10px] uppercase tracking-[0.3em] text-[#3d7068]">Booking</a>
+          <a href="https://p.superdesign.dev/draft/910d3da6-ee56-4526-91db-3d9f8166d606" id="nav-contact" class="font-mono text-[10px] uppercase tracking-[0.3em] hover:text-[#3d7068] transition-colors">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="relative z-10 pt-48 pb-32">
+      
+      <!-- Progress Bar Container -->
+      <div class="max-w-5xl mx-auto px-12 mb-20">
+        <div class="flex justify-between font-mono text-[10px] uppercase tracking-[0.2em] mb-4 text-[#B4B4B4]">
+            <span>Initialization</span>
+            <span>Verification</span>
+        </div>
+        <div class="w-full h-px bg-[#e5e4de] relative">
+            <div id="progress-bar" class="scanline-progress" style="width: 25%;"></div>
+        </div>
+      </div>
+
+      <div class="max-w-5xl mx-auto px-12">
+        <div class="space-y-24">
+            
+            <!-- Step 01: Choose Service -->
+            <section id="step-01" class="step-container step-active transition-all duration-700">
+                <div class="flex items-baseline gap-6 mb-12">
+                    <span class="font-mono text-2xl text-[#3d7068]">01</span>
+                    <h2 class="font-serif text-5xl tracking-tight uppercase">Choose Treatment</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <button onclick="expandStep(1, 2)" class="group text-left p-8 border border-[#e5e4de] hover:border-[#3d7068] transition-all bg-white/50">
+                        <span class="font-mono text-[10px] uppercase tracking-widest text-[#B4B4B4] mb-4 block">Cat. A</span>
+                        <h3 class="font-serif text-2xl mb-2">General Dentistry</h3>
+                        <p class="font-sans text-sm opacity-60 leading-relaxed">Foundation care, cleanings, and diagnostics.</p>
+                    </button>
+                    <button onclick="expandStep(1, 2)" class="group text-left p-8 border border-[#e5e4de] hover:border-[#3d7068] transition-all bg-white/50">
+                        <span class="font-mono text-[10px] uppercase tracking-widest text-[#B4B4B4] mb-4 block">Cat. B</span>
+                        <h3 class="font-serif text-2xl mb-2">Cosmetic Dentistry</h3>
+                        <p class="font-sans text-sm opacity-60 leading-relaxed">Veneers, whitening, and aesthetic refinement.</p>
+                    </button>
+                    <button onclick="expandStep(1, 2)" class="group text-left p-8 border border-[#e5e4de] hover:border-[#3d7068] transition-all bg-white/50">
+                        <span class="font-mono text-[10px] uppercase tracking-widest text-[#B4B4B4] mb-4 block">Cat. C</span>
+                        <h3 class="font-serif text-2xl mb-2">Orthodontics</h3>
+                        <p class="font-sans text-sm opacity-60 leading-relaxed">Aligners and structural alignment solutions.</p>
+                    </button>
+                    <button onclick="expandStep(1, 2)" class="group text-left p-8 border border-[#e5e4de] hover:border-[#3d7068] transition-all bg-white/50">
+                        <span class="font-mono text-[10px] uppercase tracking-widest text-[#B4B4B4] mb-4 block">Cat. D</span>
+                        <h3 class="font-serif text-2xl mb-2">Pediatric Care</h3>
+                        <p class="font-sans text-sm opacity-60 leading-relaxed">Specialized gentle care for younger smiles.</p>
+                    </button>
+                    <button onclick="expandStep(1, 2)" class="group text-left p-8 border border-[#e5e4de] hover:border-[#3d7068] transition-all bg-white/50">
+                        <span class="font-mono text-[10px] uppercase tracking-widest text-[#B4B4B4] mb-4 block">Cat. E</span>
+                        <h3 class="font-serif text-2xl mb-2">Emergency Care</h3>
+                        <p class="font-sans text-sm opacity-60 leading-relaxed">Urgent diagnostic and pain management.</p>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Step 02: Choose Doctor -->
+            <section id="step-02" class="step-container step-inactive transition-all duration-700">
+                <div class="flex items-baseline gap-6 mb-12">
+                    <span class="font-mono text-2xl">02</span>
+                    <h2 class="font-serif text-5xl tracking-tight uppercase">Choose Practitioner</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <button onclick="expandStep(2, 3)" class="group relative border border-[#e5e4de] hover:border-[#3d7068] overflow-hidden bg-white transition-all text-left">
+                        <div class="aspect-[3/4] overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1559839734-2b71f1536783?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover grayscale opacity-60 mix-blend-multiply group-hover:scale-105 transition-transform duration-1000" alt="Dr. Elena Cross">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-serif text-xl mb-1">Dr. Elena Cross</h3>
+                            <span class="font-mono text-[9px] uppercase tracking-[0.2em] text-[#B4B4B4]">General & Family Dentistry</span>
+                        </div>
+                    </button>
+                    <button onclick="expandStep(2, 3)" class="group relative border border-[#e5e4de] hover:border-[#3d7068] overflow-hidden bg-white transition-all text-left">
+                        <div class="aspect-[3/4] overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover grayscale opacity-60 mix-blend-multiply group-hover:scale-105 transition-transform duration-1000" alt="Dr. Marcus Chen">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-serif text-xl mb-1">Dr. Marcus Chen</h3>
+                            <span class="font-mono text-[9px] uppercase tracking-[0.2em] text-[#B4B4B4]">Cosmetic & Restorative</span>
+                        </button>
+                    <button onclick="expandStep(2, 3)" class="group relative border border-[#e5e4de] hover:border-[#3d7068] overflow-hidden bg-white transition-all text-left">
+                        <div class="aspect-[3/4] overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover grayscale opacity-60 mix-blend-multiply group-hover:scale-105 transition-transform duration-1000" alt="Dr. Sofia Alvarez">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-serif text-xl mb-1">Dr. Sofia Alvarez</h3>
+                            <span class="font-mono text-[9px] uppercase tracking-[0.2em] text-[#B4B4B4]">Orthodontics & Pediatric</span>
+                        </div>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Step 03: Choose Date and Time -->
+            <section id="step-03" class="step-container step-inactive transition-all duration-700">
+                <div class="flex items-baseline gap-6 mb-12">
+                    <span class="font-mono text-2xl">03</span>
+                    <h2 class="font-serif text-5xl tracking-tight uppercase">Select Schedule</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                    <!-- Simple Calendar Placeholder -->
+                    <div class="border border-[#e5e4de] p-8 bg-white/50">
+                        <div class="flex justify-between items-center mb-8">
+                            <span class="font-mono text-[10px] uppercase tracking-widest">September 2024</span>
+                            <div class="flex gap-4">
+                                <iconify-icon icon="lucide:chevron-left" class="cursor-pointer hover:text-[#3d7068]"></iconify-icon>
+                                <iconify-icon icon="lucide:chevron-right" class="cursor-pointer hover:text-[#3d7068]"></iconify-icon>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-7 gap-y-4 text-center mb-4">
+                            <div class="font-mono text-[8px] text-[#B4B4B4]">MO</div>
+                            <div class="font-mono text-[8px] text-[#B4B4B4]">TU</div>
+                            <div class="font-mono text-[8px] text-[#B4B4B4]">WE</div>
+                            <div class="font-mono text-[8px] text-[#B4B4B4]">TH</div>
+                            <div class="font-mono text-[8px] text-[#B4B4B4]">FR</div>
+                            <div class="font-mono text-[8px] text-[#B4B4B4]">SA</div>
+                            <div class="font-mono text-[8px] text-[#B4B4B4]">SU</div>
+                            
+                            <!-- Simplified Days -->
+                            <div class="py-2 font-mono text-xs text-[#B4B4B4]">26</div>
+                            <div class="py-2 font-mono text-xs text-[#B4B4B4]">27</div>
+                            <div class="py-2 font-mono text-xs text-[#B4B4B4]">28</div>
+                            <div class="py-2 font-mono text-xs text-[#B4B4B4]">29</div>
+                            <div class="py-2 font-mono text-xs text-[#B4B4B4]">30</div>
+                            <div class="py-2 font-mono text-xs">01</div>
+                            <div class="py-2 font-mono text-xs">02</div>
+                            <div class="py-2 font-mono text-xs">03</div>
+                            <div class="py-2 font-mono text-xs">04</div>
+                            <div class="py-2 font-mono text-xs font-bold text-[#3d7068] ring-1 ring-[#3d7068] bg-white">05</div>
+                            <div class="py-2 font-mono text-xs">06</div>
+                            <div class="py-2 font-mono text-xs">07</div>
+                            <div class="py-2 font-mono text-xs">08</div>
+                            <div class="py-2 font-mono text-xs">09</div>
+                        </div>
+                    </div>
+
+                    <!-- Time Slots -->
+                    <div>
+                        <h4 class="font-mono text-[10px] uppercase tracking-widest mb-8 text-[#B4B4B4]">Available Slots</h4>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button onclick="expandStep(3, 4)" class="py-4 border border-[#e5e4de] hover:border-[#3d7068] hover:bg-white font-mono text-xs transition-all">09:00 AM</button>
+                            <button onclick="expandStep(3, 4)" class="py-4 border border-[#e5e4de] hover:border-[#3d7068] hover:bg-white font-mono text-xs transition-all">10:30 AM</button>
+                            <button onclick="expandStep(3, 4)" class="py-4 border border-[#e5e4de] hover:border-[#3d7068] hover:bg-white font-mono text-xs transition-all">12:00 PM</button>
+                            <button onclick="expandStep(3, 4)" class="py-4 border border-[#e5e4de] hover:border-[#3d7068] hover:bg-white font-mono text-xs transition-all">02:30 PM</button>
+                            <button onclick="expandStep(3, 4)" class="py-4 border border-[#e5e4de] hover:border-[#3d7068] hover:bg-white font-mono text-xs transition-all">04:00 PM</button>
+                            <button onclick="expandStep(3, 4)" class="py-4 border border-[#e5e4de] hover:border-[#3d7068] hover:bg-white font-mono text-xs transition-all">05:30 PM</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 04: Confirm -->
+            <section id="step-04" class="step-container step-inactive transition-all duration-700">
+                <div class="flex items-baseline gap-6 mb-12">
+                    <span class="font-mono text-2xl">04</span>
+                    <h2 class="font-serif text-5xl tracking-tight uppercase">Confirm Appointment</h2>
+                </div>
+
+                <div class="border border-[#e5e4de] p-12 bg-white">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+                        <div>
+                            <span class="font-mono text-[10px] uppercase tracking-widest text-[#B4B4B4] block mb-4">Booking Detail</span>
+                            <div class="space-y-4">
+                                <div class="flex justify-between border-b border-[#e5e4de] pb-4">
+                                    <span class="font-sans text-sm">Treatment</span>
+                                    <span class="font-serif italic text-lg">General Dentistry</span>
+                                </div>
+                                <div class="flex justify-between border-b border-[#e5e4de] pb-4">
+                                    <span class="font-sans text-sm">Practitioner</span>
+                                    <span class="font-serif italic text-lg">Dr. Elena Cross</span>
+                                </div>
+                                <div class="flex justify-between border-b border-[#e5e4de] pb-4">
+                                    <span class="font-sans text-sm">Date & Time</span>
+                                    <span class="font-serif italic text-lg">Sept 05, 09:00 AM</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col justify-end">
+                            <p class="font-sans text-sm text-[#B4B4B4] mb-8 leading-relaxed">
+                                By confirming, you agree to our 24-hour cancellation policy. A confirmation email with clinical instructions will be sent to your primary address.
+                            </p>
+                            <a href="#" id="confirm-cta" class="cta-btn block text-center bg-[#3d7068] text-white font-mono text-[12px] uppercase tracking-[0.4em] py-6 rounded-[2px]">
+                                Finalize Booking
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+      </div>
+
+      <!-- Simple Footer -->
+      <footer class="max-w-7xl mx-auto px-12 mt-32 border-t border-[#e5e4de] py-24 flex flex-col md:flex-row justify-between items-start">
+        <div class="mb-12 md:mb-0">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="h-[1px] bg-[#1c1c1c] w-6"></div>
+            <span class="font-serif text-[24px] tracking-tight">BOBO Dental</span>
+          </div>
+          <p class="font-mono text-[10px] uppercase tracking-[0.3em] max-w-xs leading-loose">
+            422 Editorial Avenue,<br>
+            New York, NY 10012<br>
+            Studio 4B
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-24">
+          <div>
+            <h5 class="font-mono text-[10px] uppercase tracking-[0.3em] mb-8 text-[#B4B4B4]">Clinical</h5>
+            <ul class="space-y-4">
+              <li><a href="https://p.superdesign.dev/draft/662b536d-9029-4e4f-98aa-891c29a696a2" id="footer-services-link" class="font-mono text-[10px] uppercase tracking-[0.2em] hover:text-[#3d7068] transition-colors">Services</a></li>
+              <li><a href="https://p.superdesign.dev/draft/ae90abe9-fd92-4f89-87c6-9ed1be314d8c#doctors" id="footer-doctors-link" class="font-mono text-[10px] uppercase tracking-[0.2em] hover:text-[#3d7068] transition-colors">Our Doctors</a></li>
+              <li><a href="https://p.superdesign.dev/draft/662b536d-9029-4e4f-98aa-891c29a696a2#pricing" id="footer-pricing-link" class="font-mono text-[10px] uppercase tracking-[0.2em] hover:text-[#3d7068] transition-colors">Pricing</a></li>
+            </ul>
+          </div>
+          <div>
+            <h5 class="font-mono text-[10px] uppercase tracking-[0.3em] mb-8 text-[#B4B4B4]">Legal</h5>
+            <ul class="space-y-4">
+              <li><a href="#privacy" id="footer-privacy-link" class="font-mono text-[10px] uppercase tracking-[0.2em] hover:text-[#3d7068] transition-colors">Privacy</a></li>
+              <li><a href="#terms" id="footer-terms-link" class="font-mono text-[10px] uppercase tracking-[0.2em] hover:text-[#3d7068] transition-colors">Terms</a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+
+    </main>
+  </div>
+
+  <script>
+    function expandStep(current, next) {
+        const steps = document.querySelectorAll('.step-container');
+        const progressBar = document.getElementById('progress-bar');
+        
+        steps.forEach((step, index) => {
+            if ((index + 1) === next) {
+                step.classList.add('step-active');
+                step.classList.remove('step-inactive');
+                // Smooth scroll to next step
+                step.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                step.classList.add('step-inactive');
+                step.classList.remove('step-active');
+            }
+        });
+
+        const progressMap = { 1: 25, 2: 50, 3: 75, 4: 100 };
+        progressBar.style.width = progressMap[next] + '%';
+    }
+
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('main-nav');
+      if (window.scrollY > 50) {
+        nav.classList.add('nav-scrolled');
+        nav.classList.remove('pt-8');
+        nav.classList.add('py-4');
+      } else {
+        nav.classList.remove('nav-scrolled');
+        nav.classList.add('pt-8');
+        nav.classList.remove('py-4');
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Booking — BOBO Dental</title>
+  <meta name="view-transition" content="same-origin">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&amp;family=Space+Grotesk:wght@400;500&amp;family=Space+Mono:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper-bg: #f7f6f2;
+      --ink-fg: #1c1c1c;
+      --forest-green: #3d7068;
+      --muted-text: #B4B4B4;
+      --hairline: #e5e4de;
+      --scanline-blue: #3b82f6;
+      --editorial-easing: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .font-serif { font-family: 'Playfair Display', serif; }
+    .font-sans { font-family: 'Space Grotesk', sans-serif; }
+    .font-mono { font-family: 'Space Mono', monospace; }
+
+    .grid-bg {
+      background-image: linear-gradient(var(--hairline) 1px, transparent 1px), linear-gradient(90deg, var(--hairline) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(circle at center, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 80%);
+    }
+
+    .scanline-progress {
+      height: 2px;
+      background: var(--scanline-blue);
+      transition: width 0.7s var(--editorial-easing);
+      position: relative;
+    }
+
+    .scanline-progress::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; height: 100%; width: 30%;
+      background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
+      animation: scan 2s var(--editorial-easing) infinite;
+    }
+
+    @keyframes scan {
+      0% { left: -30%; }
+      100% { left: 100%; }
+    }
+
+    .step-active { height: auto; opacity: 1; visibility: visible; margin-bottom: 3rem; }
+    .step-inactive { height: 60px; overflow: hidden; opacity: 0.4; margin-bottom: 1.5rem; }
+
+    .cta-btn {
+      transition: all 0.7s var(--editorial-easing);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-btn::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(255,255,255,0.2);
+      transform: translateY(100%);
+      transition: transform 0.7s var(--editorial-easing);
+    }
+
+    .cta-btn:active::after { transform: translateY(0); }
+
+    .vertical-guide {
+      position: fixed;
+      top: 0; bottom: 0; width: 1px; background: var(--hairline); z-index: 1;
+      pointer-events: none;
+    }
+
+    @view-transition { navigation: auto; }
+    html { background-color: #f7f6f2; }
+
+    .step-container {
+      transition: all 0.7s var(--editorial-easing);
+    }
+  </style>
+</head>
+<body>
+  <div class="min-h-screen bg-[#f7f6f2] text-[#1c1c1c] font-sans selection:bg-[#3d7068] selection:text-white flex flex-col">
+    
+    <!-- Fixed Guides -->
+    <div class="vertical-guide left-1/2"></div>
+
+    <!-- Background Texture -->
+    <div class="fixed inset-0 grid-bg pointer-events-none z-0"></div>
+
+    <!-- Mobile Header -->
+    <header id="main-nav" class="sticky top-0 left-0 w-full z-50 bg-[#f7f6f2] pt-14 pb-4 px-6 border-b border-[#e5e4de]">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="h-[1px] bg-[#1c1c1c] w-4"></div>
+          <a href="#" id="nav-brand-link" class="font-serif text-[18px] leading-none tracking-tight">BOBO Dental</a>
+        </div>
+        <button id="mobile-menu-btn" class="p-2 -mr-2">
+          <iconify-icon icon="lucide:menu" class="text-xl"></iconify-icon>
+        </button>
+      </div>
+    </header>
+
+    <main class="flex-1 relative z-10 px-6 pt-8 pb-12">
+      
+      <!-- Progress Bar Container -->
+      <div class="mb-10">
+        <div class="flex justify-between font-mono text-[9px] uppercase tracking-[0.2em] mb-3 text-[#B4B4B4]">
+            <span>Step: <span id="step-num">01</span></span>
+            <span>Verification</span>
+        </div>
+        <div class="w-full h-px bg-[#e5e4de] relative">
+            <div id="progress-bar" class="scanline-progress" style="width: 25%;"></div>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+          
+          <!-- Step 01: Choose Service -->
+          <section id="step-01" class="step-container step-active">
+              <button onclick="expandStep(1, 1)" class="w-full flex items-baseline gap-4 mb-8 text-left">
+                  <span class="font-mono text-xl text-[#3d7068]">01</span>
+                  <h2 class="font-serif text-3xl tracking-tight uppercase">Choose Treatment</h2>
+              </button>
+              
+              <div class="flex flex-col gap-4">
+                  <button onclick="expandStep(1, 2)" class="w-full group text-left p-6 border border-[#e5e4de] active:border-[#3d7068] transition-all bg-white min-h-[88px] flex flex-col justify-center">
+                      <span class="font-mono text-[9px] uppercase tracking-widest text-[#B4B4B4] mb-2 block">Cat. A</span>
+                      <h3 class="font-serif text-xl">General Dentistry</h3>
+                  </button>
+                  <button onclick="expandStep(1, 2)" class="w-full group text-left p-6 border border-[#e5e4de] active:border-[#3d7068] transition-all bg-white min-h-[88px] flex flex-col justify-center">
+                      <span class="font-mono text-[9px] uppercase tracking-widest text-[#B4B4B4] mb-2 block">Cat. B</span>
+                      <h3 class="font-serif text-xl">Cosmetic Dentistry</h3>
+                  </button>
+                  <button onclick="expandStep(1, 2)" class="w-full group text-left p-6 border border-[#e5e4de] active:border-[#3d7068] transition-all bg-white min-h-[88px] flex flex-col justify-center">
+                      <span class="font-mono text-[9px] uppercase tracking-widest text-[#B4B4B4] mb-2 block">Cat. C</span>
+                      <h3 class="font-serif text-xl">Orthodontics</h3>
+                  </button>
+                  <button onclick="expandStep(1, 2)" class="w-full group text-left p-6 border border-[#e5e4de] active:border-[#3d7068] transition-all bg-white min-h-[88px] flex flex-col justify-center">
+                      <span class="font-mono text-[9px] uppercase tracking-widest text-[#B4B4B4] mb-2 block">Cat. D</span>
+                      <h3 class="font-serif text-xl">Pediatric Care</h3>
+                  </button>
+              </div>
+          </section>
+
+          <!-- Step 02: Choose Doctor -->
+          <section id="step-02" class="step-container step-inactive">
+              <button onclick="expandStep(2, 2)" class="w-full flex items-baseline gap-4 mb-8 text-left">
+                  <span class="font-mono text-xl">02</span>
+                  <h2 class="font-serif text-3xl tracking-tight uppercase">Choose Practitioner</h2>
+              </button>
+              
+              <div class="flex flex-col gap-6">
+                  <button onclick="expandStep(2, 3)" class="w-full group flex border border-[#e5e4de] bg-white text-left overflow-hidden min-h-[110px]">
+                      <div class="w-24 shrink-0 overflow-hidden">
+                          <img src="https://images.unsplash.com/photo-1559839734-2b71f1536783?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover grayscale opacity-60 mix-blend-multiply" alt="Dr. Elena Cross">
+                      </div>
+                      <div class="p-5 flex flex-col justify-center">
+                          <h3 class="font-serif text-lg mb-1">Dr. Elena Cross</h3>
+                          <span class="font-mono text-[8px] uppercase tracking-[0.2em] text-[#B4B4B4]">General Dentistry</span>
+                      </div>
+                  </button>
+                  <button onclick="expandStep(2, 3)" class="w-full group flex border border-[#e5e4de] bg-white text-left overflow-hidden min-h-[110px]">
+                      <div class="w-24 shrink-0 overflow-hidden">
+                          <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover grayscale opacity-60 mix-blend-multiply" alt="Dr. Marcus Chen">
+                      </div>
+                      <div class="p-5 flex flex-col justify-center">
+                          <h3 class="font-serif text-lg mb-1">Dr. Marcus Chen</h3>
+                          <span class="font-mono text-[8px] uppercase tracking-[0.2em] text-[#B4B4B4]">Cosmetic & Restorative</span>
+                      </div>
+                  </button>
+                  <button onclick="expandStep(2, 3)" class="w-full group flex border border-[#e5e4de] bg-white text-left overflow-hidden min-h-[110px]">
+                      <div class="w-24 shrink-0 overflow-hidden">
+                          <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover grayscale opacity-60 mix-blend-multiply" alt="Dr. Sofia Alvarez">
+                      </div>
+                      <div class="p-5 flex flex-col justify-center">
+                          <h3 class="font-serif text-lg mb-1">Dr. Sofia Alvarez</h3>
+                          <span class="font-mono text-[8px] uppercase tracking-[0.2em] text-[#B4B4B4]">Orthodontics</span>
+                      </div>
+                  </button>
+              </div>
+          </section>
+
+          <!-- Step 03: Choose Date and Time -->
+          <section id="step-03" class="step-container step-inactive">
+              <button onclick="expandStep(3, 3)" class="w-full flex items-baseline gap-4 mb-8 text-left">
+                  <span class="font-mono text-xl">03</span>
+                  <h2 class="font-serif text-3xl tracking-tight uppercase">Select Schedule</h2>
+              </button>
+
+              <div class="space-y-8">
+                  <div class="border border-[#e5e4de] p-6 bg-white">
+                      <div class="flex justify-between items-center mb-6">
+                          <span class="font-mono text-[9px] uppercase tracking-widest">September 2024</span>
+                          <div class="flex gap-4">
+                              <iconify-icon icon="lucide:chevron-left" class="text-lg"></iconify-icon>
+                              <iconify-icon icon="lucide:chevron-right" class="text-lg"></iconify-icon>
+                          </div>
+                      </div>
+                      <div class="grid grid-cols-7 gap-y-3 text-center mb-2">
+                          <div class="font-mono text-[7px] text-[#B4B4B4]">MO</div>
+                          <div class="font-mono text-[7px] text-[#B4B4B4]">TU</div>
+                          <div class="font-mono text-[7px] text-[#B4B4B4]">WE</div>
+                          <div class="font-mono text-[7px] text-[#B4B4B4]">TH</div>
+                          <div class="font-mono text-[7px] text-[#B4B4B4]">FR</div>
+                          <div class="font-mono text-[7px] text-[#B4B4B4]">SA</div>
+                          <div class="font-mono text-[7px] text-[#B4B4B4]">SU</div>
+                          
+                          <div class="py-2 font-mono text-[10px] text-[#B4B4B4]">30</div>
+                          <div class="py-2 font-mono text-[10px]">01</div>
+                          <div class="py-2 font-mono text-[10px]">02</div>
+                          <div class="py-2 font-mono text-[10px]">03</div>
+                          <div class="py-2 font-mono text-[10px]">04</div>
+                          <div class="py-2 font-mono text-[10px] font-bold text-[#3d7068] ring-1 ring-[#3d7068] bg-[#f7f6f2]">05</div>
+                          <div class="py-2 font-mono text-[10px]">06</div>
+                      </div>
+                  </div>
+
+                  <div>
+                      <h4 class="font-mono text-[9px] uppercase tracking-widest mb-4 text-[#B4B4B4]">Available Slots</h4>
+                      <div class="grid grid-cols-3 gap-2">
+                          <button onclick="expandStep(3, 4)" class="py-4 border border-[#e5e4de] active:border-[#3d7068] active:bg-white font-mono text-[10px]">09:00</button>
+                          <button onclick="expandStep(3, 4)" class="py-4 border border-[#e5e4de] active:border-[#3d7068] active:bg-white font-mono text-[10px]">10:30</button>
+                          <button onclick="expandStep(3, 4)" class="py-4 border border-[#e5e4de] active:border-[#3d7068] active:bg-white font-mono text-[10px]">12:00</button>
+                          <button onclick="expandStep(3, 4)" class="py-4 border border-[#e5e4de] active:border-[#3d7068] active:bg-white font-mono text-[10px]">14:30</button>
+                          <button onclick="expandStep(3, 4)" class="py-4 border border-[#e5e4de] active:border-[#3d7068] active:bg-white font-mono text-[10px]">16:00</button>
+                          <button onclick="expandStep(3, 4)" class="py-4 border border-[#e5e4de] active:border-[#3d7068] active:bg-white font-mono text-[10px]">17:30</button>
+                      </div>
+                  </div>
+              </div>
+          </section>
+
+          <!-- Step 04: Confirm -->
+          <section id="step-04" class="step-container step-inactive pb-12">
+              <button onclick="expandStep(4, 4)" class="w-full flex items-baseline gap-4 mb-8 text-left">
+                  <span class="font-mono text-xl">04</span>
+                  <h2 class="font-serif text-3xl tracking-tight uppercase">Confirm Appointment</h2>
+              </button>
+
+              <div class="border border-[#e5e4de] p-8 bg-white">
+                  <div class="space-y-6 mb-8">
+                      <span class="font-mono text-[9px] uppercase tracking-widest text-[#B4B4B4] block">Booking Summary</span>
+                      <div class="space-y-4">
+                          <div class="flex justify-between border-b border-[#e5e4de] pb-3">
+                              <span class="font-sans text-[12px]">Treatment</span>
+                              <span class="font-serif italic text-base">General Care</span>
+                          </div>
+                          <div class="flex justify-between border-b border-[#e5e4de] pb-3">
+                              <span class="font-sans text-[12px]">Practitioner</span>
+                              <span class="font-serif italic text-base">Dr. Elena Cross</span>
+                          </div>
+                          <div class="flex justify-between border-b border-[#e5e4de] pb-3">
+                              <span class="font-sans text-[12px]">Schedule</span>
+                              <span class="font-serif italic text-base">Sept 05, 09:00</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="space-y-6">
+                      <p class="font-sans text-[11px] text-[#B4B4B4] leading-relaxed">
+                          By confirming, you agree to our 24-hour cancellation policy.
+                      </p>
+                      <button id="confirm-cta" class="cta-btn w-full bg-[#3d7068] text-white font-mono text-[11px] uppercase tracking-[0.3em] py-5 rounded-[2px]">
+                          Finalize Booking
+                      </button>
+                  </div>
+              </div>
+          </section>
+      </div>
+    </main>
+
+    <!-- Mobile Footer -->
+    <footer class="shrink-0 px-6 pt-16 pb-[34px] border-t border-[#e5e4de] z-10">
+      <div class="flex flex-col gap-10">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="h-[1px] bg-[#1c1c1c] w-4"></div>
+            <span class="font-serif text-[20px] tracking-tight">BOBO Dental</span>
+          </div>
+          <p class="font-mono text-[9px] uppercase tracking-[0.2em] leading-relaxed">
+            422 Editorial Avenue,<br>
+            New York, NY 10012
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-8">
+          <div>
+            <h5 class="font-mono text-[9px] uppercase tracking-[0.2em] mb-4 text-[#B4B4B4]">Clinical</h5>
+            <ul class="space-y-3">
+              <li><a href="#" id="f-services" class="font-mono text-[9px] uppercase tracking-[0.2em]">Services</a></li>
+              <li><a href="#" id="f-doctors" class="font-mono text-[9px] uppercase tracking-[0.2em]">Doctors</a></li>
+            </ul>
+          </div>
+          <div>
+            <h5 class="font-mono text-[9px] uppercase tracking-[0.2em] mb-4 text-[#B4B4B4]">Legal</h5>
+            <ul class="space-y-3">
+              <li><a href="#" id="f-privacy" class="font-mono text-[9px] uppercase tracking-[0.2em]">Privacy</a></li>
+              <li><a href="#" id="f-terms" class="font-mono text-[9px] uppercase tracking-[0.2em]">Terms</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    function expandStep(current, next) {
+        const steps = document.querySelectorAll('.step-container');
+        const progressBar = document.getElementById('progress-bar');
+        const stepNum = document.getElementById('step-num');
+        
+        steps.forEach((step, index) => {
+            const stepIndex = index + 1;
+            if (stepIndex === next) {
+                step.classList.add('step-active');
+                step.classList.remove('step-inactive');
+                // Offset for sticky header
+                const topOffset = 100;
+                const elementPosition = step.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - topOffset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            } else {
+                step.classList.add('step-inactive');
+                step.classList.remove('step-active');
+            }
+        });
+
+        const progressMap = { 1: 25, 2: 50, 3: 75, 4: 100 };
+        progressBar.style.width = progressMap[next] + '%';
+        stepNum.textContent = next.toString().padStart(2, '0');
+    }
+  </script>
+
+</body>
+</html>

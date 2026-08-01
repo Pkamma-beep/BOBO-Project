@@ -1,0 +1,403 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOBO Dental — Modern Oral Care</title>
+  <meta name="view-transition" content="same-origin">
+  <link rel="prefetch" href="https://p.superdesign.dev/draft/662b536d-9029-4e4f-98aa-891c29a696a2" as="document">
+  <link rel="prefetch" href="https://p.superdesign.dev/draft/f30ff9ed-4faf-46aa-b877-c088d19fa29e" as="document">
+  <link rel="prefetch" href="https://p.superdesign.dev/draft/910d3da6-ee56-4526-91db-3d9f8166d606" as="document">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&amp;family=Space+Grotesk:wght@400;500&amp;family=Space+Mono:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper-bg: #f7f6f2;
+      --ink-fg: #1c1c1c;
+      --forest-green: #3d7068;
+      --muted-text: #B4B4B4;
+      --hairline: #e5e4de;
+      --scanline-blue: #3b82f6;
+      --editorial-easing: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .font-serif { font-family: 'Playfair Display', serif; }
+    .font-sans { font-family: 'Space Grotesk', sans-serif; }
+    .font-mono { font-family: 'Space Mono', monospace; }
+
+    .grid-bg {
+      background-image: linear-gradient(var(--hairline) 1px, transparent 1px), linear-gradient(90deg, var(--hairline) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(circle at center, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 80%);
+    }
+
+    .hairline-b { border-bottom: 1px solid var(--hairline); }
+    .hairline-r { border-right: 1px solid var(--hairline); }
+    .hairline-l { border-left: 1px solid var(--hairline); }
+    .hairline-a { border: 1px solid var(--hairline); }
+
+    .nav-scrolled {
+      background-color: rgba(247, 246, 242, 0.8);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .scanline {
+      height: 2px;
+      background: var(--scanline-blue);
+      animation: scan 2s var(--editorial-easing) infinite;
+      position: absolute;
+      left: 0;
+      width: 0%;
+    }
+
+    @keyframes scan {
+      0% { left: 0%; width: 0%; }
+      50% { left: 0%; width: 100%; }
+      100% { left: 100%; width: 0%; }
+    }
+
+    .pulse-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--forest-green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(61, 112, 104, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(61, 112, 104, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(61, 112, 104, 0); }
+    }
+
+    .cta-btn {
+      transition: all 0.7s var(--editorial-easing);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-btn::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(255,255,255,0.2);
+      transform: translateY(100%);
+      transition: transform 0.7s var(--editorial-easing);
+    }
+
+    .cta-btn:hover::after { transform: translateY(0); }
+    .cta-btn:hover { letter-spacing: 0.4em; }
+
+    .word-reveal span { transition: opacity 0.7s var(--editorial-easing); }
+
+    .vertical-guide {
+      position: fixed;
+      top: 0; bottom: 0; width: 1px; background: var(--hairline); z-index: 1;
+      pointer-events: none;
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--paper-bg); }
+    ::-webkit-scrollbar-thumb { background: var(--muted-text); }
+
+    @view-transition { navigation: auto; }
+    html { background-color: #f7f6f2; }
+    ::view-transition { background-color: #f7f6f2; }
+
+    nav { view-transition-name: main-nav; }
+    #nav-brand-link { view-transition-name: brand; }
+    main { view-transition-name: main-content; }
+
+    ::view-transition-old(main-nav),
+    ::view-transition-new(main-nav),
+    ::view-transition-old(brand),
+    ::view-transition-new(brand) {
+      animation: none;
+      mix-blend-mode: normal;
+    }
+
+    ::view-transition-old(main-content) {
+      animation: 0.25s ease-out both fade-out;
+    }
+    ::view-transition-new(main-content) {
+      animation: 0.25s ease-in 0.1s both fade-in;
+    }
+
+    @keyframes fade-out { from { opacity: 1; } to { opacity: 0; } }
+    @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+  </style>
+</head>
+<body>
+  <div class="min-h-screen bg-[#f7f6f2] text-[#1c1c1c] font-sans selection:bg-[#3d7068] selection:text-white" data-sd-id="1">
+    
+    <!-- Fixed Guides -->
+    <div class="vertical-guide left-1/4" data-sd-id="2"></div>
+    <div class="vertical-guide left-2/4" data-sd-id="3"></div>
+    <div class="vertical-guide left-3/4" data-sd-id="4"></div>
+
+    <!-- Background Texture -->
+    <div class="fixed inset-0 grid-bg pointer-events-none z-0" data-sd-id="5"></div>
+
+    <!-- Navigation -->
+    <nav id="main-nav" class="fixed top-0 left-0 w-full z-50 transition-all duration-700 ease-[var(--editorial-easing)] pt-8 pb-4 px-12" data-sd-id="6">
+      <div class="max-w-7xl mx-auto flex items-center justify-between relative" data-sd-id="7">
+        <div class="flex items-center gap-4" data-sd-id="8">
+          <div class="h-[1px] bg-[#1c1c1c] w-6" data-sd-id="9"></div>
+          <a href="https://p.superdesign.dev/draft/ae90abe9-fd92-4f89-87c6-9ed1be314d8c" id="nav-brand-link" class="font-serif text-[20px] leading-none tracking-tight" data-sd-id="10">BOBO Dental</a>
+          <div class="h-[1px] bg-[#1c1c1c] w-8" data-sd-id="11"></div>
+        </div>
+
+        <div class="flex items-center gap-12" data-sd-id="12">
+          <a href="https://p.superdesign.dev/draft/ae90abe9-fd92-4f89-87c6-9ed1be314d8c" id="nav-home" class="font-mono text-[10px] uppercase tracking-[0.3em] text-[#3d7068] transition-colors underline underline-offset-4" data-sd-id="13">Home</a>
+          <a href="https://p.superdesign.dev/draft/662b536d-9029-4e4f-98aa-891c29a696a2" id="nav-services" class="font-mono text-[10px] uppercase tracking-[0.3em] hover:text-[#3d7068] transition-colors" data-sd-id="14">Services</a>
+          <a href="https://p.superdesign.dev/draft/f30ff9ed-4faf-46aa-b877-c088d19fa29e" id="nav-booking" class="font-mono text-[10px] uppercase tracking-[0.3em] hover:text-[#3d7068] transition-colors" data-sd-id="15">Booking</a>
+          <a href="https://p.superdesign.dev/draft/910d3da6-ee56-4526-91db-3d9f8166d606" id="nav-contact" class="font-mono text-[10px] uppercase tracking-[0.3em] hover:text-[#3d7068] transition-colors" data-sd-id="16">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="relative z-10 pt-32" data-sd-id="17">
+      
+      <!-- Hero Section -->
+      <section class="max-w-7xl mx-auto px-12 py-24 text-center border-b border-[#e5e4de]" data-sd-id="18">
+        <div class="inline-flex items-center gap-3 border border-[#e5e4de] px-4 py-2 rounded-[2px] mb-12" data-sd-id="19">
+          <div class="pulse-dot" data-sd-id="20"></div>
+          <span class="font-mono text-[10px] uppercase tracking-[0.2em]" data-sd-id="21">Now accepting new patients</span>
+        </div>
+
+        <h1 class="font-serif text-[9vw] leading-[0.95] tracking-tight uppercase mb-8 font-light" data-sd-id="22">
+          A Healthier Smile <br>
+          <span class="text-[#B4B4B4] italic" data-sd-id="23">Is Precise</span> Artistry
+        </h1>
+
+        <p class="max-w-2xl mx-auto font-sans text-lg mb-12 opacity-80" data-sd-id="24">
+          Experience boutique dental care where advanced clinical precision meets personal dedication. 
+          We don't just treat teeth; we curate your oral health journey.
+        </p>
+
+        <a href="https://p.superdesign.dev/draft/f30ff9ed-4faf-46aa-b877-c088d19fa29e" id="cta-hero-book" class="cta-btn inline-block bg-[#3d7068] text-white font-mono text-[11px] uppercase tracking-[0.25em] px-10 py-5 rounded-[2px]" data-sd-id="25">
+          Book Appointment
+        </a>
+      </section>
+
+      <!-- Stats Grid -->
+      <section class="max-w-7xl mx-auto border-b border-[#e5e4de] grid grid-cols-1 md:grid-cols-3" data-sd-id="26">
+        <div class="p-12 border-[#e5e4de] md:border-r flex flex-col items-center text-center group transition-colors duration-700 hover:bg-white" data-sd-id="27">
+          <div class="w-12 h-12 border border-[#e5e4de] flex items-center justify-center mb-6" data-sd-id="28">
+            <iconify-icon icon="lucide:calendar-check" class="text-xl"></iconify-icon>
+          </div>
+          <h2 class="font-serif text-5xl mb-2" data-sd-id="29">15+</h2>
+          <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-[#B4B4B4]" data-sd-id="30">Years of Care</span>
+        </div>
+        <div class="p-12 border-[#e5e4de] md:border-r flex flex-col items-center text-center group transition-colors duration-700 hover:bg-white" data-sd-id="31">
+          <div class="w-12 h-12 border border-[#e5e4de] flex items-center justify-center mb-6" data-sd-id="32">
+            <iconify-icon icon="lucide:users" class="text-xl"></iconify-icon>
+          </div>
+          <h2 class="font-serif text-5xl mb-2" data-sd-id="33">12,000+</h2>
+          <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-[#B4B4B4]" data-sd-id="34">Patients Treated</span>
+        </div>
+        <div class="p-12 flex flex-col items-center text-center group transition-colors duration-700 hover:bg-white" data-sd-id="35">
+          <div class="w-12 h-12 border border-[#e5e4de] flex items-center justify-center mb-6" data-sd-id="36">
+            <iconify-icon icon="lucide:star" class="text-xl"></iconify-icon>
+          </div>
+          <h2 class="font-serif text-5xl mb-2" data-sd-id="37">4.9/5</h2>
+          <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-[#B4B4B4]" data-sd-id="38">Patient Rating</span>
+        </div>
+      </section>
+
+      <!-- Mission Statement (Scroll Reveal) -->
+      <section class="max-w-7xl mx-auto px-12 py-32 border-b border-[#e5e4de]" data-sd-id="39">
+        <p class="font-serif text-4xl md:text-6xl leading-[1.2] max-w-5xl word-reveal" data-sd-id="40">
+          <span class="opacity-100" data-sd-id="41">At BOBO Dental, we believe</span>
+          <span class="opacity-40" data-sd-id="42"> that modern dentistry</span>
+          <span class="opacity-40" data-sd-id="43"> should be as comfortable</span>
+          <span class="opacity-40" data-sd-id="44"> as it is technologically advanced.</span>
+          <span class="opacity-40" data-sd-id="45"> Our philosophy is simple:</span>
+          <span class="opacity-40 italic text-[#B4B4B4]" data-sd-id="46"> patient first,</span>
+          <span class="opacity-40" data-sd-id="47"> technique always,</span>
+          <span class="opacity-40" data-sd-id="48"> transparency throughout.</span>
+        </p>
+        <div class="mt-12 flex items-center gap-6" data-sd-id="49">
+           <div class="h-[1px] bg-[#1c1c1c] w-16" data-sd-id="50"></div>
+           <span class="font-mono text-[10px] uppercase tracking-[0.3em]" data-sd-id="51">Our Philosophy</span>
+        </div>
+      </section>
+
+      <!-- Interactive Workflow -->
+      <section class="max-w-7xl mx-auto border-b border-[#e5e4de] grid grid-cols-1 md:grid-cols-2 min-h-[600px]" data-sd-id="52">
+        <div class="p-24 border-[#e5e4de] md:border-r flex flex-col justify-center" data-sd-id="53">
+          <div class="space-y-16" data-sd-id="54">
+            <div class="group cursor-pointer" data-sd-id="55">
+              <div class="font-mono text-[12px] text-[#3d7068] mb-4 tracking-widest" data-sd-id="56">01</div>
+              <h3 class="font-serif text-4xl mb-4" data-sd-id="57">Book Your Visit</h3>
+              <p class="font-sans text-[#1c1c1c] leading-relaxed max-w-sm" data-sd-id="58">
+                Schedule your initial consultation through our seamless online portal or a brief phone call.
+              </p>
+            </div>
+            <div class="group cursor-pointer opacity-40 hover:opacity-100 transition-opacity duration-700" data-sd-id="59">
+              <div class="font-mono text-[12px] mb-4 tracking-widest" data-sd-id="60">02</div>
+              <h3 class="font-serif text-4xl mb-4" data-sd-id="61">Meet Your Dentist</h3>
+              <p class="font-sans leading-relaxed max-w-sm" data-sd-id="62">
+                A detailed conversation about your goals and a comprehensive digital diagnostic evaluation.
+              </p>
+            </div>
+            <div class="group cursor-pointer opacity-40 hover:opacity-100 transition-opacity duration-700" data-sd-id="63">
+              <div class="font-mono text-[12px] mb-4 tracking-widest" data-sd-id="64">03</div>
+              <h3 class="font-serif text-4xl mb-4" data-sd-id="65">Personalized Treatment</h3>
+              <p class="font-sans leading-relaxed max-w-sm" data-sd-id="66">
+                We execute your curated care plan using state-of-the-art non-invasive technologies.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="relative flex items-center justify-center p-12" data-sd-id="67">
+          <div class="sticky top-40 w-full aspect-[4/5] border border-[#e5e4de] bg-[#e5e4de] overflow-hidden" data-sd-id="68">
+             <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&amp;w=2070&amp;auto=format&amp;fit=crop" alt="Treatment Room" class="w-full h-full object-cover grayscale opacity-60 mix-blend-multiply transition-transform duration-1000" data-sd-id="69">
+             <div class="absolute bottom-0 left-0 w-full h-1 bg-[#e5e4de]" data-sd-id="70">
+               <div class="scanline" data-sd-id="71"></div>
+             </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Treatment Categories Tabs -->
+      <section class="max-w-7xl mx-auto py-32 border-b border-[#e5e4de]" data-sd-id="72">
+        <div class="text-center mb-16 px-12" data-sd-id="73">
+          <div class="flex justify-center gap-4 flex-wrap mb-12" data-sd-id="74">
+            <button class="px-6 py-2 border border-[#3d7068] bg-[#3d7068] text-white font-mono text-[10px] uppercase tracking-[0.2em] rounded-full" data-sd-id="75">General Dentistry</button>
+            <button class="px-6 py-2 border border-[#e5e4de] hover:border-[#3d7068] font-mono text-[10px] uppercase tracking-[0.2em] rounded-full transition-colors" data-sd-id="76">Cosmetic Dentistry</button>
+            <button class="px-6 py-2 border border-[#e5e4de] hover:border-[#3d7068] font-mono text-[10px] uppercase tracking-[0.2em] rounded-full transition-colors" data-sd-id="77">Orthodontics</button>
+            <button class="px-6 py-2 border border-[#e5e4de] hover:border-[#3d7068] font-mono text-[10px] uppercase tracking-[0.2em] rounded-full transition-colors" data-sd-id="78">Pediatric Dentistry</button>
+            <button class="px-6 py-2 border border-[#e5e4de] hover:border-[#3d7068] font-mono text-[10px] uppercase tracking-[0.2em] rounded-full transition-colors" data-sd-id="79">Emergency Care</button>
+          </div>
+
+          <div class="relative border border-[#e5e4de] p-16 text-left overflow-hidden bg-transparent group" data-sd-id="80">
+            <!-- Ghost Icon Background -->
+            <div class="absolute -top-10 -right-10 opacity-[0.03] pointer-events-none" data-sd-id="81">
+               <iconify-icon icon="lucide:shield-check" class="text-[320px]"></iconify-icon>
+            </div>
+
+            <div class="max-w-3xl mb-16 relative z-10" data-sd-id="82">
+              <h4 class="font-serif text-4xl mb-6 uppercase tracking-tight" data-sd-id="83">General Oral Health &amp; Maintenance</h4>
+              <p class="font-sans text-xl opacity-80 leading-relaxed" data-sd-id="84">
+                The foundation of a lifetime of smiles. We provide comprehensive cleaning, preventative screenings, and restorative procedures using bio-compatible materials that match your natural enamel.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10 border-t border-[#e5e4de] pt-12" data-sd-id="85">
+              <div data-sd-id="86">
+                <span class="font-mono text-[10px] uppercase tracking-[0.3em] block mb-4 text-[#3d7068]" data-sd-id="87">Benefits</span>
+                <p class="font-sans text-sm" data-sd-id="88">Regular screenings significantly reduce long-term risk of gum disease and systemic inflammation.</p>
+              </div>
+              <div data-sd-id="89">
+                <span class="font-mono text-[10px] uppercase tracking-[0.3em] block mb-4 text-[#3d7068]" data-sd-id="90">Approach</span>
+                <p class="font-sans text-sm" data-sd-id="91">Micro-invasive techniques ensure we preserve as much natural tooth structure as possible.</p>
+              </div>
+              <div data-sd-id="92">
+                <span class="font-mono text-[10px] uppercase tracking-[0.3em] block mb-4 text-[#3d7068]" data-sd-id="93">Technology</span>
+                <p class="font-sans text-sm" data-sd-id="94">Intra-oral 3D scanning allows for precise early detection that traditional x-rays might miss.</p>
+              </div>
+            </div>
+
+            <div class="mt-16 flex items-center justify-between" data-sd-id="95">
+               <a href="https://p.superdesign.dev/draft/662b536d-9029-4e4f-98aa-891c29a696a2" id="view-all-services" class="font-mono text-[10px] uppercase tracking-[0.4em] text-[#3d7068] border-b border-[#3d7068] pb-1 hover:opacity-70 transition-opacity" data-sd-id="96">View All Services</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Booking Form Section -->
+      <section class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 border-b border-[#e5e4de]" data-sd-id="97">
+        <div class="p-24 border-[#e5e4de] md:border-r" data-sd-id="98">
+          <h2 class="font-serif text-[6vw] leading-tight uppercase mb-8" data-sd-id="99">Book A Visit</h2>
+          <p class="font-mono text-[12px] uppercase tracking-[0.3em] text-[#B4B4B4] mb-12" data-sd-id="100">
+            Your journey to precision <br> oral care begins here.
+          </p>
+          <div class="flex items-center gap-8" data-sd-id="101">
+             <div class="h-12 w-12 border border-[#e5e4de] flex items-center justify-center" data-sd-id="102">
+               <iconify-icon icon="lucide:phone-call" class="text-xl"></iconify-icon>
+             </div>
+             <div data-sd-id="103">
+                <p class="font-mono text-[10px] uppercase tracking-[0.2em]" data-sd-id="104">Direct line</p>
+                <p class="font-serif text-xl" data-sd-id="105">+1 (555) 902-1010</p>
+             </div>
+          </div>
+        </div>
+        <div class="p-24 bg-white" data-sd-id="106">
+          <form class="space-y-12" data-sd-id="107">
+            <div class="relative" data-sd-id="108">
+              <input type="text" placeholder="FULL NAME" class="w-full bg-transparent border-b border-[#e5e4de] py-4 focus:outline-none focus:border-[#3d7068] font-mono text-[11px] placeholder:text-[#B4B4B4] uppercase tracking-[0.2em] transition-colors" data-sd-id="109">
+            </div>
+            <div class="relative" data-sd-id="110">
+              <input type="tel" placeholder="PHONE NUMBER" class="w-full bg-transparent border-b border-[#e5e4de] py-4 focus:outline-none focus:border-[#3d7068] font-mono text-[11px] placeholder:text-[#B4B4B4] uppercase tracking-[0.2em] transition-colors" data-sd-id="111">
+            </div>
+            <div class="relative" data-sd-id="112">
+              <input type="text" placeholder="PREFERRED DATE (MM/DD/YYYY)" class="w-full bg-transparent border-b border-[#e5e4de] py-4 focus:outline-none focus:border-[#3d7068] font-mono text-[11px] placeholder:text-[#B4B4B4] uppercase tracking-[0.2em] transition-colors" data-sd-id="113">
+            </div>
+            <button type="submit" id="submit-booking" class="cta-btn w-full bg-[#3d7068] text-white font-mono text-[12px] uppercase tracking-[0.4em] py-6 shadow-[0_4px_0_0_rgba(61,112,104,0.1)]" data-sd-id="114">
+              Submit Request
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="max-w-7xl mx-auto px-12 py-24 flex flex-col md:flex-row justify-between items-start" data-sd-id="115">
+        <div class="mb-12 md:mb-0" data-sd-id="116">
+          <div class="flex items-center gap-4 mb-6" data-sd-id="117">
+            <div class="h-[1px] bg-[#1c1c1c] w-6" data-sd-id="118"></div>
+            <span class="font-serif text-[24px] tracking-tight" data-sd-id="119">BOBO Dental</span>
+          </div>
+          <p class="font-mono text-[10px] uppercase tracking-[0.3em] max-w-xs leading-loose" data-sd-id="120">
+            422 Editorial Avenue,<br>
+            New York, NY 10012<br>
+            Studio 4B
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-24" data-sd-id="121">
+          <div data-sd-id="122">
+            <h5 class="font-mono text-[10px] uppercase tracking-[0.3em] mb-8 text-[#B4B4B4]" data-sd-id="123">Clinical</h5>
+            <ul class="space-y-4" data-sd-id="124">
+              <li data-sd-id="125"><a href="https://p.superdesign.dev/draft/662b536d-9029-4e4f-98aa-891c29a696a2" id="footer-link-1" class="font-mono text-[10px] uppercase tracking-[0.2em] hover:text-[#3d7068] transition-colors" data-sd-id="126">Services</a></li>
+              <li data-sd-id="127"><a href="#our-doctors" id="footer-link-2" class="font-mono text-[10px] uppercase tracking-[0.2em] hover:text-[#3d7068] transition-colors" data-sd-id="128">Our Doctors</a></li>
+              <li data-sd-id="129"><a href="#pricing" id="footer-link-3" class="font-mono text-[10px] uppercase tracking-[0.2em] hover:text-[#3d7068] transition-colors" data-sd-id="130">Pricing</a></li>
+            </ul>
+          </div>
+          <div data-sd-id="131">
+            <h5 class="font-mono text-[10px] uppercase tracking-[0.3em] mb-8 text-[#B4B4B4]" data-sd-id="132">Legal</h5>
+            <ul class="space-y-4" data-sd-id="133">
+              <li data-sd-id="134"><a href="#privacy" id="footer-link-4" class="font-mono text-[10px] uppercase tracking-[0.2em] hover:text-[#3d7068] transition-colors" data-sd-id="135">Privacy</a></li>
+              <li data-sd-id="136"><a href="#terms" id="footer-link-5" class="font-mono text-[10px] uppercase tracking-[0.2em] hover:text-[#3d7068] transition-colors" data-sd-id="137">Terms</a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+
+    </main>
+  </div>
+
+  <script>
+    // Scroll Logic for Nav
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('main-nav');
+      if (window.scrollY > 50) {
+        nav.classList.add('nav-scrolled');
+        nav.classList.remove('pt-8');
+        nav.classList.add('py-4');
+      } else {
+        nav.classList.remove('nav-scrolled');
+        nav.classList.add('pt-8');
+        nav.classList.remove('py-4');
+      }
+    });
+  </script>
+
+</body></html>

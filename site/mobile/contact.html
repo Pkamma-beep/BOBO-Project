@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — BOBO Dental</title>
+  <meta name="view-transition" content="same-origin">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&amp;family=Space+Grotesk:wght@400;500&amp;family=Space+Mono:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper-bg: #f7f6f2;
+      --ink-fg: #1c1c1c;
+      --forest-green: #3d7068;
+      --muted-text: #B4B4B4;
+      --hairline: #e5e4de;
+      --scanline-blue: #3b82f6;
+      --editorial-easing: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .font-serif { font-family: 'Playfair Display', serif; }
+    .font-sans { font-family: 'Space Grotesk', sans-serif; }
+    .font-mono { font-family: 'Space Mono', monospace; }
+
+    .grid-bg {
+      background-image: linear-gradient(var(--hairline) 1px, transparent 1px), linear-gradient(90deg, var(--hairline) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(circle at center, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 80%);
+    }
+
+    .hairline-b { border-bottom: 1px solid var(--hairline); }
+    .hairline-a { border: 1px solid var(--hairline); }
+
+    .cta-btn {
+      transition: all 0.7s var(--editorial-easing);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-btn::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(255,255,255,0.1);
+      transform: translateY(100%);
+      transition: transform 0.7s var(--editorial-easing);
+    }
+
+    .cta-btn:hover::after { transform: translateY(0); }
+
+    @view-transition { navigation: auto; }
+    html { background-color: #f7f6f2; }
+
+    nav { view-transition-name: main-nav; }
+    #nav-brand-link { view-transition-name: brand; }
+    main { view-transition-name: main-content; }
+
+    .vertical-guide {
+      position: fixed;
+      top: 0; bottom: 0; width: 1px; background: var(--hairline); z-index: 1;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="flex flex-col min-h-screen bg-[#f7f6f2] text-[#1c1c1c] font-sans selection:bg-[#3d7068] selection:text-white">
+    
+    <!-- Fixed Guides (Mobile optimized) -->
+    <div class="vertical-guide left-1/4"></div>
+    <div class="vertical-guide left-2/4"></div>
+    <div class="vertical-guide left-3/4"></div>
+
+    <!-- Background Texture -->
+    <div class="fixed inset-0 grid-bg pointer-events-none z-0"></div>
+
+    <!-- Navigation (Mobile Bar) -->
+    <nav id="main-nav" class="fixed top-0 left-0 w-full z-50 pt-14 pb-4 px-6 bg-[#f7f6f2] border-b border-[#e5e4de]">
+      <div class="flex items-center justify-between relative">
+        <div class="flex items-center gap-3">
+          <div class="h-[1px] bg-[#1c1c1c] w-4"></div>
+          <a href="#" id="nav-brand-link" class="font-serif text-[18px] leading-none tracking-tight">BOBO Dental</a>
+        </div>
+        <button id="mobile-menu-toggle" class="w-10 h-10 flex items-center justify-center">
+          <iconify-icon icon="lucide:menu" class="text-2xl"></iconify-icon>
+        </button>
+      </div>
+    </nav>
+
+    <main class="flex-1 relative z-10 pt-32">
+      
+      <!-- Contact Layout (Stacked) -->
+      <div class="px-6 space-y-16 pb-20">
+        
+        <!-- Header Area -->
+        <div class="space-y-6">
+          <h1 class="font-serif text-[18vw] leading-[0.9] tracking-tight uppercase font-light">
+            Get in <br>
+            <span class="italic text-[#B4B4B4]">Touch</span>
+          </h1>
+          <p class="font-sans text-lg opacity-80">
+            We're here to answer any questions about our procedures, insurance coverage, or specific dental concerns.
+          </p>
+        </div>
+
+        <!-- Contact Form (Solid BG on Mobile) -->
+        <div class="bg-white p-8 border border-[#e5e4de] shadow-[20px_20px_0_0_#3d7068]">
+          <form class="space-y-8">
+            <div class="relative">
+              <input type="text" placeholder="FULL NAME" class="w-full bg-transparent border-b border-[#e5e4de] py-4 focus:outline-none focus:border-[#3d7068] font-mono text-[10px] placeholder:text-[#B4B4B4] uppercase tracking-[0.2em] transition-colors">
+            </div>
+            <div class="relative">
+              <input type="email" placeholder="EMAIL ADDRESS" class="w-full bg-transparent border-b border-[#e5e4de] py-4 focus:outline-none focus:border-[#3d7068] font-mono text-[10px] placeholder:text-[#B4B4B4] uppercase tracking-[0.2em] transition-colors">
+            </div>
+            <div class="relative">
+              <textarea rows="4" placeholder="YOUR MESSAGE" class="w-full bg-transparent border-b border-[#e5e4de] py-4 focus:outline-none focus:border-[#3d7068] font-mono text-[10px] placeholder:text-[#B4B4B4] uppercase tracking-[0.2em] transition-colors resize-none"></textarea>
+            </div>
+            <button type="submit" id="cta-submit-contact" class="cta-btn w-full bg-[#3d7068] text-white font-mono text-[11px] uppercase tracking-[0.4em] py-5 min-h-[56px] flex items-center justify-center">
+              Send Message
+            </button>
+          </form>
+        </div>
+
+        <!-- Info Grid -->
+        <div class="grid grid-cols-1 gap-10 border-t border-[#e5e4de] pt-12">
+          <div class="space-y-3">
+            <h3 class="font-mono text-[10px] uppercase tracking-[0.3em] text-[#B4B4B4]">Clinic Address</h3>
+            <address class="font-mono text-[13px] not-italic leading-relaxed">
+              422 Editorial Avenue,<br>
+              Studio 4B, NY 10012
+            </address>
+          </div>
+          <div class="space-y-3">
+            <h3 class="font-mono text-[10px] uppercase tracking-[0.3em] text-[#B4B4B4]">Clinical Hours</h3>
+            <p class="font-mono text-[13px] uppercase leading-relaxed">
+              Mon – Fri: 08:00 – 18:00<br>
+              Sat: 10:00 – 14:00
+            </p>
+          </div>
+          <div class="space-y-3">
+            <h3 class="font-mono text-[10px] uppercase tracking-[0.3em] text-[#B4B4B4]">Connect</h3>
+            <p class="font-mono text-[13px] leading-relaxed">
+              +1 (555) 902-1010<br>
+              hello@bobodental.com
+            </p>
+          </div>
+        </div>
+
+        <!-- Directory Section (Stacked) -->
+        <section class="pt-12">
+          <div class="flex items-center gap-4 mb-12">
+             <div class="h-[1px] bg-[#1c1c1c] w-8"></div>
+             <h2 class="font-mono text-[10px] uppercase tracking-[0.4em]">Meet Our Doctors</h2>
+          </div>
+
+          <div class="space-y-8">
+            <!-- Dr. Elena Cross -->
+            <div class="bg-white border border-[#e5e4de] p-8 space-y-6">
+              <div class="aspect-[4/3] overflow-hidden bg-[#1c1c1c] grayscale opacity-70 mix-blend-multiply">
+                <img src="https://images.unsplash.com/photo-1559839734-2b71f1536783?q=80&w=2070&auto=format&fit=crop" alt="Dr. Elena Cross" class="w-full h-full object-cover">
+              </div>
+              <div class="space-y-3">
+                <h3 class="font-serif text-2xl">Dr. Elena Cross</h3>
+                <span class="block font-mono text-[9px] uppercase tracking-[0.2em] text-[#3d7068]">General and Family Dentistry</span>
+                <p class="font-sans text-sm opacity-70 leading-relaxed">
+                  Dedicated to building lasting relationships with families through gentle, preventative oral care.
+                </p>
+              </div>
+              <a href="#contact-elena" id="contact-dr-elena" class="w-full flex items-center justify-center font-mono text-[10px] uppercase tracking-[0.2em] border border-[#1c1c1c] py-4 min-h-[48px] active:bg-[#1c1c1c] active:text-white transition-all">Contact Dr. Cross</a>
+            </div>
+
+            <!-- Dr. Marcus Chen -->
+            <div class="bg-white border border-[#e5e4de] p-8 space-y-6">
+              <div class="aspect-[4/3] overflow-hidden bg-[#1c1c1c] grayscale opacity-70 mix-blend-multiply">
+                <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=2070&auto=format&fit=crop" alt="Dr. Marcus Chen" class="w-full h-full object-cover">
+              </div>
+              <div class="space-y-3">
+                <h3 class="font-serif text-2xl">Dr. Marcus Chen</h3>
+                <span class="block font-mono text-[9px] uppercase tracking-[0.2em] text-[#3d7068]">Cosmetic & Restorative</span>
+                <p class="font-sans text-sm opacity-70 leading-relaxed">
+                  Specializing in advanced smile reconstruction using digital CAD/CAM design.
+                </p>
+              </div>
+              <a href="#contact-marcus" id="contact-dr-marcus" class="w-full flex items-center justify-center font-mono text-[10px] uppercase tracking-[0.2em] border border-[#1c1c1c] py-4 min-h-[48px] active:bg-[#1c1c1c] active:text-white transition-all">Contact Dr. Chen</a>
+            </div>
+
+            <!-- Dr. Sofia Alvarez -->
+            <div class="bg-white border border-[#e5e4de] p-8 space-y-6">
+              <div class="aspect-[4/3] overflow-hidden bg-[#1c1c1c] grayscale opacity-70 mix-blend-multiply">
+                <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?q=80&w=2070&auto=format&fit=crop" alt="Dr. Sofia Alvarez" class="w-full h-full object-cover">
+              </div>
+              <div class="space-y-3">
+                <h3 class="font-serif text-2xl">Dr. Sofia Alvarez</h3>
+                <span class="block font-mono text-[9px] uppercase tracking-[0.2em] text-[#3d7068]">Orthodontics & Pediatric</span>
+                <p class="font-sans text-sm opacity-70 leading-relaxed">
+                  Focusing on developmental alignment and making dental visits inspiring for children.
+                </p>
+              </div>
+              <a href="#contact-sofia" id="contact-dr-sofia" class="w-full flex items-center justify-center font-mono text-[10px] uppercase tracking-[0.2em] border border-[#1c1c1c] py-4 min-h-[48px] active:bg-[#1c1c1c] active:text-white transition-all">Contact Dr. Alvarez</a>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Footer (Mobile Optimized) -->
+      <footer class="px-6 py-16 flex flex-col space-y-12 border-t border-[#e5e4de] pb-[34px]">
+        <div class="space-y-6">
+          <div class="flex items-center gap-3">
+            <div class="h-[1px] bg-[#1c1c1c] w-6"></div>
+            <span class="font-serif text-[20px] tracking-tight">BOBO Dental</span>
+          </div>
+          <p class="font-mono text-[10px] uppercase tracking-[0.3em] leading-loose text-[#B4B4B4]">
+            422 Editorial Avenue,<br>
+            New York, NY 10012
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-8">
+          <div class="space-y-6">
+            <h5 class="font-mono text-[10px] uppercase tracking-[0.3em] text-[#B4B4B4]">Links</h5>
+            <ul class="space-y-4">
+              <li><a href="#" id="footer-mobile-services" class="font-mono text-[10px] uppercase tracking-[0.2em]">Services</a></li>
+              <li><a href="#" id="footer-mobile-booking" class="font-mono text-[10px] uppercase tracking-[0.2em]">Booking</a></li>
+            </ul>
+          </div>
+          <div class="space-y-6">
+            <h5 class="font-mono text-[10px] uppercase tracking-[0.3em] text-[#B4B4B4]">Legal</h5>
+            <ul class="space-y-4">
+              <li><a href="#" id="footer-mobile-privacy" class="font-mono text-[10px] uppercase tracking-[0.2em]">Privacy</a></li>
+              <li><a href="#" id="footer-mobile-terms" class="font-mono text-[10px] uppercase tracking-[0.2em]">Terms</a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+
+    </main>
+  </div>
+</body>
+</html>

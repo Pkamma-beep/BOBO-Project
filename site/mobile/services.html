@@ -1,0 +1,213 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services — BOBO Dental</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&amp;family=Space+Grotesk:wght@400;500&amp;family=Space+Mono:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet">
+  <meta name="view-transition" content="same-origin">
+  <style>
+    :root {
+      --paper-bg: #f7f6f2;
+      --ink-fg: #1c1c1c;
+      --forest-green: #3d7068;
+      --muted-text: #B4B4B4;
+      --hairline: #e5e4de;
+      --scanline-blue: #3b82f6;
+      --editorial-easing: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    .font-serif { font-family: 'Playfair Display', serif; }
+    .font-sans { font-family: 'Space Grotesk', sans-serif; }
+    .font-mono { font-family: 'Space Mono', monospace; }
+
+    .grid-bg {
+      background-image: linear-gradient(var(--hairline) 1px, transparent 1px), linear-gradient(90deg, var(--hairline) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(circle at center, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 80%);
+    }
+
+    .hairline-b { border-bottom: 1px solid var(--hairline); }
+    .hairline-a { border: 1px solid var(--hairline); }
+
+    .nav-scrolled {
+      background-color: #f7f6f2;
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .cta-btn {
+      transition: all 0.7s var(--editorial-easing);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-btn::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(255,255,255,0.2);
+      transform: translateY(100%);
+      transition: transform 0.7s var(--editorial-easing);
+    }
+    .cta-btn:active::after { transform: translateY(0); }
+
+    /* Hide scrollbar for categories row */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    @view-transition { navigation: auto; }
+    html { background-color: var(--paper-bg); }
+  </style>
+</head>
+<body>
+  <div class="flex flex-col min-h-screen bg-[#f7f6f2] text-[#1c1c1c] font-sans selection:bg-[#3d7068] selection:text-white">
+    
+    <!-- Fixed Guides (Mobile Optimized) -->
+    <div class="fixed top-0 bottom-0 left-1/4 w-[1px] bg-[#e5e4de] z-0 pointer-events-none opacity-30"></div>
+    <div class="fixed top-0 bottom-0 left-2/4 w-[1px] bg-[#e5e4de] z-0 pointer-events-none opacity-30"></div>
+    <div class="fixed top-0 bottom-0 left-3/4 w-[1px] bg-[#e5e4de] z-0 pointer-events-none opacity-30"></div>
+    
+    <!-- Background Texture -->
+    <div class="fixed inset-0 grid-bg pointer-events-none z-0"></div>
+
+    <!-- Compact Mobile Header -->
+    <nav id="main-nav" class="fixed top-0 left-0 w-full z-50 bg-[#f7f6f2] hairline-b h-14 px-6 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="h-[1px] bg-[#1c1c1c] w-4"></div>
+        <a href="#" id="mobile-logo" class="font-serif text-[18px] tracking-tight">BOBO Dental</a>
+      </div>
+      <button class="w-11 h-11 flex items-center justify-center">
+        <iconify-icon icon="lucide:menu" class="text-2xl"></iconify-icon>
+      </button>
+    </nav>
+
+    <main class="flex-1 pt-14 pb-[34px] relative z-10">
+      
+      <!-- Hero Section -->
+      <header class="px-6 py-12 border-b border-[#e5e4de]">
+        <div class="inline-flex items-center gap-3 border border-[#e5e4de] px-3 py-1.5 rounded-[2px] mb-8">
+          <span class="font-mono text-[9px] uppercase tracking-[0.2em]">Advanced Oral Care Philosophy</span>
+        </div>
+
+        <h1 class="font-serif text-[42px] leading-[1.1] tracking-tight uppercase mb-6 font-light">
+          Our Clinical <br>
+          <span class="text-[#B4B4B4] italic">Specialties</span>
+        </h1>
+
+        <p class="font-sans text-base opacity-80 mb-12">
+          Foundational health and aesthetic mastery performed with microscopic precision.
+        </p>
+
+        <!-- Category Switcher (Scrollable Row) -->
+        <div class="flex overflow-x-auto no-scrollbar gap-2 -mx-6 px-6">
+          <button class="whitespace-nowrap h-11 px-6 border border-[#3d7068] bg-[#3d7068] text-white font-mono text-[9px] uppercase tracking-[0.2em] rounded-full shrink-0">General Dentistry</button>
+          <button class="whitespace-nowrap h-11 px-6 border border-[#e5e4de] font-mono text-[9px] uppercase tracking-[0.2em] rounded-full shrink-0">Cosmetic</button>
+          <button class="whitespace-nowrap h-11 px-6 border border-[#e5e4de] font-mono text-[9px] uppercase tracking-[0.2em] rounded-full shrink-0">Orthodontics</button>
+          <button class="whitespace-nowrap h-11 px-6 border border-[#e5e4de] font-mono text-[9px] uppercase tracking-[0.2em] rounded-full shrink-0">Pediatric</button>
+        </div>
+      </header>
+
+      <!-- Active Content Card -->
+      <section class="px-6 py-12 border-b border-[#e5e4de]">
+        <div class="relative hairline-a p-8 overflow-hidden bg-[#f7f6f2]">
+          <!-- Scaled Down Ghost Icon -->
+          <div class="absolute top-10 right-[-40px] opacity-[0.05] pointer-events-none">
+             <iconify-icon icon="lucide:stethoscope" class="text-[140px]"></iconify-icon>
+          </div>
+
+          <div class="relative z-10 space-y-8">
+            <div class="space-y-4">
+              <h2 class="font-serif text-3xl tracking-tight leading-none uppercase">General Oral <br> & Prevention</h2>
+              <p class="font-serif text-xl leading-relaxed opacity-90">
+                The foundation of a lifetime of smiles. We focus on non-invasive diagnostics.
+              </p>
+            </div>
+
+            <!-- Stacked Clinical Grid -->
+            <div class="space-y-8 border-t border-[#e5e4de] pt-8">
+              <div class="flex gap-4">
+                <div class="shrink-0 w-10 h-10 hairline-a flex items-center justify-center text-[#3d7068]">
+                  <iconify-icon icon="lucide:sparkle"></iconify-icon>
+                </div>
+                <div>
+                  <h4 class="font-serif text-lg mb-1">Cleanings & Prevention</h4>
+                  <p class="font-sans text-sm opacity-70">Guided Biofilm Therapy (GBT) for painless maintenance.</p>
+                </div>
+              </div>
+              <div class="flex gap-4">
+                <div class="shrink-0 w-10 h-10 hairline-a flex items-center justify-center text-[#3d7068]">
+                  <iconify-icon icon="lucide:search"></iconify-icon>
+                </div>
+                <div>
+                  <h4 class="font-serif text-lg mb-1">Digital Screenings</h4>
+                  <p class="font-sans text-sm opacity-70">3D intra-oral scanning for early detection.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stacked Benefit Grid Bottom -->
+            <div class="mt-12 pt-8 border-t border-[#e5e4de] space-y-6">
+              <div>
+                <span class="font-mono text-[9px] uppercase tracking-[0.3em] block mb-2 text-[#3d7068]">Longevity</span>
+                <p class="font-sans text-sm">Consistent maintenance reduces the need for invasive restorations.</p>
+              </div>
+              <div>
+                <span class="font-mono text-[9px] uppercase tracking-[0.3em] block mb-2 text-[#3d7068]">Biomechanics</span>
+                <p class="font-sans text-sm">Our bio-compatible materials expand just like natural enamel.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="px-6 py-20 text-center">
+        <h3 class="font-serif text-4xl uppercase tracking-tighter mb-10">
+          Ready to refine <br> your <span class="text-[#B4B4B4] italic">oral health?</span>
+        </h3>
+        <div class="flex flex-col gap-6">
+          <a href="#booking" id="mobile-cta-book" class="cta-btn h-[60px] flex items-center justify-center bg-[#3d7068] text-white font-mono text-[10px] uppercase tracking-[0.25em] rounded-[2px]">
+            Book Consultation
+          </a>
+          <a href="#contact" id="mobile-cta-contact" class="h-[44px] flex items-center justify-center font-mono text-[9px] uppercase tracking-[0.3em] border-b border-[#1c1c1c] w-max mx-auto">
+            Inquire About Treatment
+          </a>
+        </div>
+      </section>
+
+      <!-- Mobile Footer -->
+      <footer class="px-6 py-16 border-t border-[#e5e4de]">
+        <div class="flex items-center gap-3 mb-8">
+          <div class="h-[1px] bg-[#1c1c1c] w-4"></div>
+          <span class="font-serif text-[20px] tracking-tight">BOBO Dental</span>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-12 mb-12">
+          <div>
+            <h5 class="font-mono text-[9px] uppercase tracking-[0.3em] mb-4 text-[#B4B4B4]">Clinical</h5>
+            <ul class="space-y-3">
+              <li><a href="#" id="mob-footer-1" class="font-mono text-[9px] uppercase tracking-[0.2em]">Services</a></li>
+              <li><a href="#" id="mob-footer-2" class="font-mono text-[9px] uppercase tracking-[0.2em]">Doctors</a></li>
+              <li><a href="#" id="mob-footer-3" class="font-mono text-[9px] uppercase tracking-[0.2em]">Pricing</a></li>
+            </ul>
+          </div>
+          <div>
+            <h5 class="font-mono text-[9px] uppercase tracking-[0.3em] mb-4 text-[#B4B4B4]">Legal</h5>
+            <ul class="space-y-3">
+              <li><a href="#" id="mob-footer-4" class="font-mono text-[9px] uppercase tracking-[0.2em]">Privacy</a></li>
+              <li><a href="#" id="mob-footer-5" class="font-mono text-[9px] uppercase tracking-[0.2em]">Terms</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="font-mono text-[9px] uppercase tracking-[0.3em] leading-relaxed opacity-60">
+          422 Editorial Avenue,<br>
+          New York, NY 10012
+        </p>
+      </footer>
+
+    </main>
+  </div>
+</body></html>
