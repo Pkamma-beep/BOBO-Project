@@ -22,6 +22,9 @@ export default function WordReveal({ segments, className }: WordRevealProps) {
           if (entry.isIntersecting) {
             entry.target.classList.remove("opacity-[0.15]");
             entry.target.classList.add("opacity-100");
+          } else {
+            entry.target.classList.remove("opacity-100");
+            entry.target.classList.add("opacity-[0.15]");
           }
         });
       },
@@ -35,11 +38,7 @@ export default function WordReveal({ segments, className }: WordRevealProps) {
   return (
     <p ref={containerRef} className={`word-reveal ${className ?? ""}`}>
       {segments.map((segment, i) => (
-        <span
-          key={i}
-          data-reveal
-          className={i === 0 ? "opacity-100" : "opacity-[0.15]"}
-        >
+        <span key={i} data-reveal className="opacity-[0.15]">
           {segment}
         </span>
       ))}
