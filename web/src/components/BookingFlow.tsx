@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { serviceCategories, doctors, timeSlots } from "@/lib/data";
@@ -22,6 +22,22 @@ export default function BookingFlow() {
   const [viewMonth, setViewMonth] = useState(today);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [time, setTime] = useState<string | null>(null);
+
+  const stepRefs = useRef<Partial<Record<1 | 2 | 3 | 4, HTMLElement | null>>>(
+    {}
+  );
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    stepRefs.current[step]?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+  }, [step]);
 
   const { leadingDays, currentDays, trailingDays } = getCalendarGrid(
     viewMonth.getFullYear(),
@@ -62,6 +78,9 @@ export default function BookingFlow() {
       <div className="max-w-5xl mx-auto px-6 md:px-12 space-y-16 md:space-y-24">
         {/* Step 01: Choose Service */}
         <section
+          ref={(el) => {
+            stepRefs.current[1] = el;
+          }}
           className={`transition-opacity duration-700 ${
             step === 1 ? "opacity-100" : "opacity-40"
           }`}
@@ -108,6 +127,9 @@ export default function BookingFlow() {
 
         {/* Step 02: Choose Doctor */}
         <section
+          ref={(el) => {
+            stepRefs.current[2] = el;
+          }}
           className={`transition-opacity duration-700 ${
             step === 2 ? "opacity-100" : "opacity-40"
           }`}
@@ -162,6 +184,9 @@ export default function BookingFlow() {
 
         {/* Step 03: Choose Date and Time */}
         <section
+          ref={(el) => {
+            stepRefs.current[3] = el;
+          }}
           className={`transition-opacity duration-700 ${
             step === 3 ? "opacity-100" : "opacity-40"
           }`}
@@ -288,6 +313,9 @@ export default function BookingFlow() {
 
         {/* Step 04: Confirm */}
         <section
+          ref={(el) => {
+            stepRefs.current[4] = el;
+          }}
           className={`transition-opacity duration-700 ${
             step === 4 ? "opacity-100" : "opacity-40"
           }`}
