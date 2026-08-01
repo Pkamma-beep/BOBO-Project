@@ -104,6 +104,10 @@ export default function BookingFlow() {
                 key={cat.slug}
                 type="button"
                 onClick={() => {
+                  if (cat.slug !== categorySlug) {
+                    setDoctorSlug(null);
+                    setTime(null);
+                  }
                   setCategorySlug(cat.slug);
                   setStep(2);
                 }}
@@ -153,6 +157,9 @@ export default function BookingFlow() {
                 key={doc.slug}
                 type="button"
                 onClick={() => {
+                  if (doc.slug !== doctorSlug) {
+                    setTime(null);
+                  }
                   setDoctorSlug(doc.slug);
                   setStep(3);
                 }}
