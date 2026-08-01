@@ -4,19 +4,39 @@ import { useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { serviceCategories, doctors, timeSlots } from "@/lib/data";
+import { MONTH_NAMES, getCalendarGrid, isSameDate, isSameMonth } from "@/lib/calendar";
 
 const WEEKDAYS = ["MO", "TU", "WE", "TH", "FR", "SA", "SU"];
-const PREV_MONTH_DAYS = [26, 27, 28, 29, 30];
-const CURRENT_MONTH_DAYS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const PROGRESS_BY_STEP = { 1: 25, 2: 50, 3: 75, 4: 100 };
+
+function startOfMonth(date: Date) {
+  return new Date(date.getFullYear(), date.getMonth(), 1);
+}
 
 export default function BookingFlow() {
   const [step, setStep] = useState<1 | 2 | 3 | 4>(1);
   const [categorySlug, setCategorySlug] = useState<string | null>(null);
   const [doctorSlug, setDoctorSlug] = useState<string | null>(null);
-  const [day, setDay] = useState(5);
+  const today = startOfMonth(new Date());
+  const [viewMonth, setViewMonth] = useState(today);
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [time, setTime] = useState<string | null>(null);
+
+  const { leadingDays, currentDays, trailingDays } = getCalendarGrid(
+    viewMonth.getFullYear(),
+    viewMonth.getMonth()
+  );
+  const isAtEarliestMonth = isSameMonth(viewMonth, today);
+
+  const goToPrevMonth = () => {
+    if (isAtEarliestMonth) return;
+    setViewMonth(
+      (d) => new Date(d.getFullYear(), d.getMonth() - 1, 1)
+    );
+  };
+  const goToNextMonth = () =>
+    setViewMonth((d) => new Date(d.getFullYear(), d.getMonth() + 1, 1));
 
   const category =
     serviceCategories.find((c) => c.slug === categorySlug) ??
@@ -163,11 +183,30 @@ export default function BookingFlow() {
             <div className="border border-[#e5e4de] p-8 bg-white/50">
               <div className="flex justify-between items-center mb-8">
                 <span className="font-mono text-[10px] uppercase tracking-widest">
-                  September 2024
+                  {MONTH_NAMES[viewMonth.getMonth()]} {viewMonth.getFullYear()}
                 </span>
-                <div className="flex gap-4 text-[#B4B4B4]">
-                  <ChevronLeft size={16} />
-                  <ChevronRight size={16} />
+                <div className="flex gap-4">
+                  <button
+                    type="button"
+                    aria-label="Previous month"
+                    onClick={goToPrevMonth}
+                    disabled={isAtEarliestMonth}
+                    className={`transition-colors ${
+                      isAtEarliestMonth
+                        ? "text-[#e5e4de] cursor-not-allowed"
+                        : "text-[#B4B4B4] hover:text-[#3d7068] cursor-pointer"
+                    }`}
+                  >
+                    <ChevronLeft size={16} />
+                  </button>
+                  <button
+                    type="button"
+                    aria-label="Next month"
+                    onClick={goToNextMonth}
+                    className="text-[#B4B4B4] hover:text-[#3d7068] transition-colors cursor-pointer"
+                  >
+                    <ChevronRight size={16} />
+                  </button>
                 </div>
               </div>
               <div className="grid grid-cols-7 gap-y-4 text-center mb-4">
@@ -179,27 +218,43 @@ export default function BookingFlow() {
                     {wd}
                   </div>
                 ))}
-                {PREV_MONTH_DAYS.map((d) => (
+                {leadingDays.map((d) => (
                   <div
-                    key={`prev-${d}`}
+                    key={`leading-${d}`}
                     className="py-2 font-mono text-xs text-[#B4B4B4]"
                   >
                     {String(d).padStart(2, "0")}
                   </div>
                 ))}
-                {CURRENT_MONTH_DAYS.map((d) => (
-                  <button
-                    key={d}
-                    type="button"
-                    onClick={() => setDay(d)}
-                    className={`py-2 font-mono text-xs transition-colors ${
-                      day === d
-                        ? "font-bold text-[#3d7068] ring-1 ring-[#3d7068] bg-white"
-                        : "hover:text-[#3d7068]"
-                    }`}
+                {currentDays.map((d) => {
+                  const cellDate = new Date(
+                    viewMonth.getFullYear(),
+                    viewMonth.getMonth(),
+                    d
+                  );
+                  const active = isSameDate(cellDate, selectedDate);
+                  return (
+                    <button
+                      key={d}
+                      type="button"
+                      onClick={() => setSelectedDate(cellDate)}
+                      className={`py-2 font-mono text-xs transition-colors ${
+                        active
+                          ? "font-bold text-[#3d7068] ring-1 ring-[#3d7068] bg-white"
+                          : "hover:text-[#3d7068]"
+                      }`}
+                    >
+                      {String(d).padStart(2, "0")}
+                    </button>
+                  );
+                })}
+                {trailingDays.map((d) => (
+                  <div
+                    key={`trailing-${d}`}
+                    className="py-2 font-mono text-xs text-[#B4B4B4]"
                   >
                     {String(d).padStart(2, "0")}
-                  </button>
+                  </div>
                 ))}
               </div>
             </div>
@@ -272,7 +327,8 @@ export default function BookingFlow() {
                   <div className="flex justify-between border-b border-[#e5e4de] pb-4">
                     <span className="font-sans text-sm">Date &amp; Time</span>
                     <span className="font-serif italic text-lg">
-                      Sept {String(day).padStart(2, "0")}
+                      {MONTH_NAMES[selectedDate.getMonth()].slice(0, 3)}{" "}
+                      {String(selectedDate.getDate()).padStart(2, "0")}
                       {time ? `, ${time}` : ""}
                     </span>
                   </div>
